@@ -1,0 +1,5 @@
+{
+  "domain": "js6.auth0.com",
+  "clientId": "byyrIXDgwu9Avn3TH7pYVQxrsA23Xcg7",
+  "audience": "http://localhost:3000/api/v1"
+}

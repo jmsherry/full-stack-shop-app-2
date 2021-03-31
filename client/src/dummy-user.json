@@ -1,0 +1,39 @@
+{
+  "http://localhost:3000/admin": true,
+  "http://localhost:3000/roles": ["Admin"],
+  "http://localhost:3000/user_authorization": {
+    "permissions": [
+      "access:admin",
+      "create:orders",
+      "create:orders",
+      "create:orders:own",
+      "create:products",
+      "create:products",
+      "delete:orders",
+      "delete:orders",
+      "delete:orders:own",
+      "delete:products",
+      "delete:products",
+      "read:orders",
+      "read:orders",
+      "read:orders:own",
+      "read:products",
+      "read:products",
+      "update:orders",
+      "update:orders",
+      "update:orders:own",
+      "update:products",
+      "update:products"
+    ]
+  },
+  "given_name": "James",
+  "family_name": "Sherry",
+  "nickname": "james.sherry",
+  "name": "James Sherry",
+  "picture": "https://lh3.googleusercontent.com/a-/AOh14Gijc8C5_rnTo4hEFUizTeswvzwquedlNKvDhiDO=s96-c",
+  "locale": "en-GB",
+  "updated_at": "2021-03-19T21:11:21.480Z",
+  "email": "james.sherry@thejump.tech",
+  "email_verified": true,
+  "sub": "google-oauth2|113477821073759809880"
+}
