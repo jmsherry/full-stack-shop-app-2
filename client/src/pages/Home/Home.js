@@ -8,7 +8,7 @@ function Home() {
     <div className="page">
       <Header />
       <PageFrame>
-        <h1>Home</h1>
+        <h1>Home change!!!!</h1>
         <ProductsList />
       </PageFrame>
     </div>
