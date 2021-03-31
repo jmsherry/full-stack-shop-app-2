@@ -9,7 +9,7 @@ deploy:
   api_key:
     secure: XpvE78zauLBdJVQ9H0YdJ87r/bpxiomqrr/I5XlFTi5uNHT+xD9iJLwhGE2zjqS1maM8GUeBIjY2PkoJuVjFBBzIYW4KInF2O0x7JqvuFgX1Q1wF8oOAZT9Emuwcl0/5gv8oShv9Sj0JTssCyn7PVkKTerywzt/IVvrKAEzdSEe4yWpWPSVbUlvT/WnNBD6RtxInPXCwh1IC9Ow3hzaRURi65vZKwBKJ79qKzXGrwfKa+FHOhnMf0p7Cea8SoEgW5WmbE2+iISh/DJBmZuXFRCEQaeXzmnUjzdZdG9S6Vxv8f+PkobXZCmTggtLQ1eReUrQ1yNRjjQjWettsL/c6406bO/ugqnKEYJvi0UnjYA09DLiicEB9zrSm08HIFB+MpHTIjTbq4ohSAHCLrTfd+ZiLfBhPTf8XzgZjO6FV4TOhpGejjTq2+10l5XApvMweJseWxk+ClTMf+yckaLBcbod1wgB2FRqUmf2KvLq0fWhH+xJ9tD6yeO3ezga8hGtLzvdvKUTtSS0f82moW0pceSySTpI39twoLw1KANTnN21+IVGwhGzE5QqSBR91nb1V/N8WflQ+05np3zmlX+Y1yMPY3iJ6IPg5j/KJxzzmdEmHF+DHpD02TkFpXSdYy77ZpCd5bDzu0RfyE+h3XYfP37zSkusmbr4d2WB1vtdDyZA=
   app:
-    main: fullstack-travis-demo
-    staging: fullstack-travis-staging
+    main: special-shop-2
+    staging: special-shop-2-staging
   on:
-    repo: jmsherry/full-stack-shop-app
+    repo: jmsherry/full-stack-shop-app-2
