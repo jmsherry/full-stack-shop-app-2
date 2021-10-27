@@ -1,5 +1,5 @@
 {
-  "domain": "js6.auth0.com",
-  "clientId": "byyrIXDgwu9Avn3TH7pYVQxrsA23Xcg7",
-  "audience": "http://localhost:3000/api/v1"
+  "domain": "the-jump.eu.auth0.com",
+  "clientId": "Zj2Z6ZB8vmgRGt7TTJKS8jR8EdE9uGnC",
+  "audience": "http://localhost:3000/api/v1/orders"
 }

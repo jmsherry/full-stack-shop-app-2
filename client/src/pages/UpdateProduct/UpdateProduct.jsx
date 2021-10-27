@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import PageFrame from "../../components/page-frame/page-frame";
+import PageFrame from "../../components/PageFrame/PageFrame";
 import Header from "../../components/Header/Header";
 import ProductForm from "../../components/ProductForm/ProductForm";
 import { useParams } from "react-router-dom";

@@ -1,21 +1,23 @@
-const jwt = require( "express-jwt");
-const jwksRsa = require( "jwks-rsa");
-// require("dotenv").config();
-// const {} = process.env;
+require("dotenv").config();
+const jwt = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
+// const logger = require("./../logger");
 
-console.log('AUTH0_DOMAIN', process.env.AUTH0_DOMAIN);
-console.log('AUTH0_AUDIENCE', process.env.AUTH0_AUDIENCE)
+const { AUTH0_DOMAIN, AUTH0_AUDIENCE } = process.env;
+
+console.log("AUTH0_DOMAIN", AUTH0_DOMAIN);
+console.log("AUTH0_AUDIENCE", AUTH0_AUDIENCE);
 
 exports.checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
+    jwksUri: `https://${AUTH0_DOMAIN}/.well-known/jwks.json`,
   }),
 
   // Validate the audience and the issuer.
-  audience: process.env.AUTH0_AUDIENCE,
-  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-  algorithms: ["RS256"]
+  audience: AUTH0_AUDIENCE,
+  issuer: `https://${AUTH0_DOMAIN}/`,
+  algorithms: ["RS256"],
 });

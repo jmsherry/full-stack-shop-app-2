@@ -4,10 +4,10 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { MenuContext } from "./../../contexts/menu.context";
+import { UIContext } from "../../contexts/ui.context";
 import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import {ProductPermission} from './../../constants';
+import { ProductPermission } from "../../constants";
 
 const useStyles = makeStyles({
   list: {
@@ -19,7 +19,7 @@ const NavDrawer = () => {
   const { user } = useAuth0();
   const classes = useStyles();
 
-  const { isOpen, toggle } = useContext(MenuContext);
+  const { isOpen, toggle } = useContext(UIContext);
 
   const handleDrawer = () => (event) => {
     if (
@@ -34,16 +34,17 @@ const NavDrawer = () => {
   let menuItems = [{ text: "Menu", to: "/" }];
 
   if (user) {
-    const {permissions} = user["http://localhost:3000/user_authorization"];
+    const { permissions } = user["http://localhost:3000/user_authorization"];
     // console.log('permissions', permissions);
-    if (
-      permissions.includes(
-        ProductPermission.CreateProducts
-      )
-    ) {
+    if (permissions.includes(ProductPermission.CreateProducts)) {
       menuItems = [...menuItems, { text: "Add Product", to: "/product/add" }];
     }
-    menuItems = [...menuItems, { text: "Profile", to: "/profile" }]
+    menuItems = [
+      ...menuItems,
+      { text: "Profile", to: "/profile" },
+      { text: "Basket", to: "/basket" },
+      { text: "Orders", to: "/orders" },
+    ];
   }
 
   return (

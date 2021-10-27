@@ -15,9 +15,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 
 // import SearchIcon from "@material-ui/icons/Search";
-import NavDrawer from "./../nav-drawer/nav-drawer";
+import NavDrawer from "./../NavDrawer/NavDrawer";
 
-import { MenuContext } from "./../../contexts/menu.context";
+import { UIContext } from "./../../contexts/ui.context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  const { toggle } = useContext(MenuContext);
+  const { toggle } = useContext(UIContext);
   const {
     // user,
     isAuthenticated,
@@ -68,7 +68,7 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h1" noWrap>
-            Todos Full-Stack App
+            Full-Stack App
           </Typography>
           {!isAuthenticated ? (
             <Button

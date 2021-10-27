@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { useParams } from "react-router-dom";
-import { productCategories } from "./../../constants";
+import { productCategories } from './../../constants';
 
 import { ProductsContext } from "./../../contexts/products.context";
 // import ErrorBoundary from "./../../components/error-boundary/ErrorBoundary";

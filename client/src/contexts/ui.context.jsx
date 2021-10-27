@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 
-export const MenuContext = createContext({
+export const UIContext = createContext({
   menu: {
     isOpen: false,
     open: () => {},
@@ -9,13 +9,13 @@ export const MenuContext = createContext({
   },
 });
 
-export const MenuProvider = (props) => {
+export const UIProvider = (props) => {
   const [isOpen, setState] = useState(false);
   const open = () => setState(true);
   const close = () => setState(false);
   const toggle = () => {setState(!isOpen)};
   return (
-    <MenuContext.Provider
+    <UIContext.Provider
       value={{
         isOpen,
         open,
@@ -24,6 +24,6 @@ export const MenuProvider = (props) => {
       }}
     >
       {props.children}
-    </MenuContext.Provider>
+    </UIContext.Provider>
   );
 };

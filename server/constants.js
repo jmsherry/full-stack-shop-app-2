@@ -1,3 +1,5 @@
+exports.productCategories = ["starter", "main", "dessert", "beverage"];
+
 exports.OrderPermission = Object.freeze({
   CreateOrders: "create:orders",
   DeleteOrders: "delete:orders",

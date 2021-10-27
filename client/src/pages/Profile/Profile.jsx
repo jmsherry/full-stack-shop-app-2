@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/Header/Header";
-import PageFrame from "../../components/page-frame/page-frame";
+import PageFrame from "../../components/PageFrame/PageFrame";
 import ProfileDisplay from "../../components/ProfileDisplay/ProfileDisplay";
 
 function Profile() {
