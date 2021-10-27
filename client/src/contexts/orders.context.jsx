@@ -147,7 +147,7 @@ export const OrdersProvider = (props) => {
         const savedOrder = await response.json();
         console.log("got data", savedOrder);
         setOrders([...orders, {...savedOrder, items}]);
-        addToast(`Saved ${savedOrder.title}`, {
+        addToast(`Order successful`, {
           appearance: "success",
         });
       } catch (err) {
