@@ -4,13 +4,30 @@ import { useAuth0 } from "@auth0/auth0-react";
 // import cloneDeep from 'lodash.cloneDeep' <-- use if your objects get complex
 const domain = window.location.host;
 
-
-export const ProductsContext = createContext({
+export const AuthContext = createContext({
   token: null,
+  user: null,
+  error: null,
+  isAuthenticated: false,
+  isLoading: false,
+  logout: () => {},
 });
 
-export const ProductsProvider = (props) => {
-  const { getAccessTokenSilently, user, loginWithRedirect } = useAuth0();
+export const AuthProvider = (props) => {
+  const {
+    // Auth state:
+    error,
+    isAuthenticated,
+    isLoading,
+    user,
+    // Auth methods:
+    getAccessTokenSilently,
+    // getAccessTokenWithPopup,
+    // getIdTokenClaims,
+    loginWithRedirect,
+    // loginWithPopup,
+    logout,
+  } = useAuth0();
   const [accessToken, setAccessToken] = useState(null);
 
   useEffect(() => {
@@ -37,14 +54,18 @@ export const ProductsProvider = (props) => {
     }
   }, [accessToken, getAccessTokenSilently, loginWithRedirect, user]);
 
-
   return (
-    <ProductsContext.Provider
+    <AuthContext.Provider
       value={{
-        token: accessToken,
+        accessToken,
+        user,
+        error,
+        isAuthenticated,
+        isLoading,
+        logout,
       }}
     >
       {props.children}
-    </ProductsContext.Provider>
+    </AuthContext.Provider>
   );
 };

@@ -8,7 +8,7 @@ import {
 import { ToastProvider } from "react-toast-notifications";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { UIProvider } from "./contexts/ui.context";
-// import { AuthProvider } from "./contexts/auth.context";
+import { AuthProvider } from "./contexts/auth.context";
 import { BasketProvider } from "./contexts/basket.context";
 import { ProductsProvider } from "./contexts/products.context";
 import { OrdersProvider } from "./contexts/orders.context";
@@ -58,33 +58,35 @@ function App() {
     <Router>
       <Auth0Provider {...providerConfig}>
         <ToastProvider autoDismiss={true}>
-          <UIProvider>
-            <ProductsProvider>
-              <OrdersProvider>
-                <BasketProvider>
-                  <Auth0Wrapper>
-                    <Switch>
-                      <Route exact path="/" component={Home} />
-                      <ProtectedRoute
-                        permissions={[ProductPermission.CreateProducts]}
-                        path="/product/add"
-                        component={AddProduct}
-                      />
-                      <ProtectedRoute
-                        permissions={[ProductPermission.UpdateProducts]}
-                        path="/product/update/:id"
-                        component={UpdateProduct}
-                      />
-                      <ProtectedRoute path="/basket" component={Basket} />
-                      <ProtectedRoute path="/orders" component={Orders} />
-                      <ProtectedRoute path="/profile" component={Profile} />
-                      <Route path="*" component={NotFound} />
-                    </Switch>
-                  </Auth0Wrapper>
-                </BasketProvider>
-              </OrdersProvider>
-            </ProductsProvider>
-          </UIProvider>
+          <AuthProvider>
+            <UIProvider>
+              <ProductsProvider>
+                <OrdersProvider>
+                  <BasketProvider>
+                    <Auth0Wrapper>
+                      <Switch>
+                        <Route exact path="/" component={Home} />
+                        <ProtectedRoute
+                          permissions={[ProductPermission.CreateProducts]}
+                          path="/product/add"
+                          component={AddProduct}
+                        />
+                        <ProtectedRoute
+                          permissions={[ProductPermission.UpdateProducts]}
+                          path="/product/update/:id"
+                          component={UpdateProduct}
+                        />
+                        <ProtectedRoute path="/basket" component={Basket} />
+                        <ProtectedRoute path="/orders" component={Orders} />
+                        <ProtectedRoute path="/profile" component={Profile} />
+                        <Route path="*" component={NotFound} />
+                      </Switch>
+                    </Auth0Wrapper>
+                  </BasketProvider>
+                </OrdersProvider>
+              </ProductsProvider>
+            </UIProvider>
+          </AuthProvider>
         </ToastProvider>
       </Auth0Provider>
     </Router>

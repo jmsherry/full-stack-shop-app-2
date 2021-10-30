@@ -1,8 +1,7 @@
-import React, { createContext, useState, useCallback, useEffect } from "react";
+import React, { createContext, useState, useCallback, useContext } from "react";
+import { AuthContext } from "./auth.context";
 import { useToasts } from "react-toast-notifications";
-import { useAuth0 } from "@auth0/auth0-react";
-// import cloneDeep from 'lodash.cloneDeep' <-- use if your objects get complex
-const domain = window.location.host;
+
 
 let headers = {
   "Content-Type": "application/json",
@@ -21,8 +20,9 @@ export const ProductsContext = createContext({
 });
 
 export const ProductsProvider = (props) => {
-  const { getAccessTokenSilently, user, loginWithRedirect } = useAuth0();
-  const [accessToken, setAccessToken] = useState(null);
+  const {
+    accessToken,
+  } = useContext(AuthContext);
 
   const [state, setState] = useState({
     loading: false,
@@ -68,29 +68,29 @@ export const ProductsProvider = (props) => {
   // const [search, setSearch] = useState("");
   const { addToast } = useToasts();
 
-  useEffect(() => {
-    const getToken = async () => {
-      console.log("gettng AT", `http://${domain}/api/v1`);
-      try {
-        const Acctoken = await getAccessTokenSilently();
-        console.log("GOT AT", Acctoken);
-        setAccessToken(Acctoken);
-        console.log("afterSet", accessToken);
-      } catch (err) {
-        console.log("getAccessTokenSilently err", err);
-        if (
-          err.error === "login_required" ||
-          err.error === "consent_required"
-        ) {
-          loginWithRedirect();
-        }
-      }
-    };
-    if (user) {
-      console.log("user", user);
-      getToken();
-    }
-  }, [accessToken, getAccessTokenSilently, loginWithRedirect, user]);
+  // useEffect(() => {
+  //   const getToken = async () => {
+  //     console.log("gettng AT", `http://${domain}/api/v1`);
+  //     try {
+  //       const Acctoken = await getAccessTokenSilently();
+  //       console.log("GOT AT", Acctoken);
+  //       setAccessToken(Acctoken);
+  //       console.log("afterSet", accessToken);
+  //     } catch (err) {
+  //       console.log("getAccessTokenSilently err", err);
+  //       if (
+  //         err.error === "login_required" ||
+  //         err.error === "consent_required"
+  //       ) {
+  //         loginWithRedirect();
+  //       }
+  //     }
+  //   };
+  //   if (user) {
+  //     console.log("user", user);
+  //     getToken();
+  //   }
+  // }, [accessToken, getAccessTokenSilently, loginWithRedirect, user]);
 
   const fetchProducts = useCallback(async () => {
     // console.log('loading', loading);
@@ -124,6 +124,7 @@ export const ProductsProvider = (props) => {
 
   const addProduct = useCallback(
     async (formData) => {
+      if(!accessToken) return;
       console.log("headers", headers);
       console.log("accessToken", accessToken);
       setLoading();
@@ -158,6 +159,7 @@ export const ProductsProvider = (props) => {
 
   const updateProduct = useCallback(
     async (id, updates) => {
+      if(!accessToken) return;
       let newProduct = null;
       setLoading();
       const {products} = state;
@@ -219,6 +221,7 @@ export const ProductsProvider = (props) => {
 
   const deleteProduct = useCallback(
     async (id) => {
+      if(!accessToken) return;
       let deletedProduct = null;
       setLoading();
       const {products} = state;

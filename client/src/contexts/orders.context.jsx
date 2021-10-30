@@ -1,8 +1,6 @@
-import React, { createContext, useState, useCallback, useEffect } from "react";
+import React, { createContext, useState, useCallback, useContext } from "react";
 import { useToasts } from "react-toast-notifications";
-import { useAuth0 } from "@auth0/auth0-react";
-// import cloneDeep from 'lodash.cloneDeep' <-- use if your objects get complex
-const domain = window.location.host;
+import { AuthContext } from "./auth.context";
 
 let headers = {
   "Content-Type": "application/json",
@@ -21,8 +19,9 @@ export const OrdersContext = createContext({
 });
 
 export const OrdersProvider = (props) => {
-  const { getAccessTokenSilently, user, loginWithRedirect } = useAuth0();
-  const [accessToken, setAccessToken] = useState(null);
+  const {
+    accessToken,
+  } = useContext(AuthContext);
 
   const [state, setState] = useState({
     loading: false,
@@ -68,33 +67,10 @@ export const OrdersProvider = (props) => {
   // const [search, setSearch] = useState("");
   const { addToast } = useToasts();
 
-  useEffect(() => {
-    const getToken = async () => {
-      console.log("gettng AT", `http://${domain}/api/v1`);
-      try {
-        const Acctoken = await getAccessTokenSilently();
-        console.log("GOT AT", Acctoken);
-        setAccessToken(Acctoken);
-        console.log("afterSet", accessToken);
-      } catch (err) {
-        console.log("getAccessTokenSilently err", err);
-        if (
-          err.error === "login_required" ||
-          err.error === "consent_required"
-        ) {
-          loginWithRedirect();
-        }
-      }
-    };
-    if (user) {
-      console.log("user", user);
-      getToken();
-    }
-  }, [accessToken, getAccessTokenSilently, loginWithRedirect, user]);
-
   const fetchOrders = useCallback(async () => {
     // console.log('loading', loading);
     // console.log('error', error);
+    
 
     console.log("fetchOrders");
 

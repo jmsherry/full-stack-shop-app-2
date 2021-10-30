@@ -1,15 +1,13 @@
-import React, { createContext, useState, useCallback, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useCallback,
+  useEffect,
+  useContext,
+} from "react";
 import { useToasts } from "react-toast-notifications";
 import localForage from "localforage";
-import { useAuth0 } from "@auth0/auth0-react";
-// import useLocalforage from "./../hooks/useLocalforage";
-
-const domain = window.location.host;
-
-let headers = {
-  "Content-Type": "application/json",
-  // 'Content-Type': 'application/x-www-form-urlencoded',
-};
+import { AuthContext } from "./auth.context";
 
 export const storageKey = "basket";
 
@@ -22,13 +20,12 @@ export const BasketContext = createContext({
 });
 
 export const BasketProvider = (props) => {
-  const { getAccessTokenSilently, user, loginWithRedirect } = useAuth0();
-  const [accessToken, setAccessToken] = useState(null);
+  const { user } = useContext(AuthContext);
 
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    if(!user) return;
+    if (!user) return;
     (async () => {
       const result = await localForage.getItem(`${storageKey}-${user.sub}`);
       // console.log("setting", result);
@@ -36,62 +33,15 @@ export const BasketProvider = (props) => {
     })();
   }, [user]);
 
-  const [state, setState] = useState({
-    loading: false,
-    loaded: false,
-    error: null,
-  });
-
-  const setLoading = useCallback(
-    () =>
-      setState({
-        ...state,
-        loading: true,
-      }),
-    [state]
-  );
-
-  const setError = useCallback(
-    (err) =>
-      setState({
-        ...state,
-        error: err.message || err.statusText,
-        loading: false,
-        loaded: true,
-      }),
-    [state]
-  );
-
   // const [search, setSearch] = useState("");
   const { addToast } = useToasts();
 
-  useEffect(() => {
-    const getToken = async () => {
-      console.log("gettng AT", `http://${domain}/api/v1`);
-      try {
-        const Acctoken = await getAccessTokenSilently();
-        console.log("GOT AT", Acctoken);
-        setAccessToken(Acctoken);
-        console.log("afterSet", accessToken);
-      } catch (err) {
-        console.log("getAccessTokenSilently err", err);
-        if (
-          err.error === "login_required" ||
-          err.error === "consent_required"
-        ) {
-          loginWithRedirect();
-        }
-      }
-    };
-    if (user) {
-      console.log("user", user);
-      getToken();
-    }
-  }, [accessToken, getAccessTokenSilently, loginWithRedirect, user]);
-
-  const saveBasket = useCallback(async (newItems) => {
-    await localForage.setItem(`${storageKey}-${user.sub}`, newItems);
-  }, [user?.sub]);
+  const saveBasket = useCallback(
+    async (newItems) => {
+      await localForage.setItem(`${storageKey}-${user.sub}`, newItems);
+    },
+    [user?.sub]
+  );
 
   const reset = useCallback(async () => {
     setItems([]);
