@@ -68,29 +68,6 @@ export const ProductsProvider = (props) => {
   // const [search, setSearch] = useState("");
   const { addToast } = useToasts();
 
-  // useEffect(() => {
-  //   const getToken = async () => {
-  //     console.log("gettng AT", `http://${domain}/api/v1`);
-  //     try {
-  //       const Acctoken = await getAccessTokenSilently();
-  //       console.log("GOT AT", Acctoken);
-  //       setAccessToken(Acctoken);
-  //       console.log("afterSet", accessToken);
-  //     } catch (err) {
-  //       console.log("getAccessTokenSilently err", err);
-  //       if (
-  //         err.error === "login_required" ||
-  //         err.error === "consent_required"
-  //       ) {
-  //         loginWithRedirect();
-  //       }
-  //     }
-  //   };
-  //   if (user) {
-  //     console.log("user", user);
-  //     getToken();
-  //   }
-  // }, [accessToken, getAccessTokenSilently, loginWithRedirect, user]);
 
   const fetchProducts = useCallback(async () => {
     // console.log('loading', loading);
