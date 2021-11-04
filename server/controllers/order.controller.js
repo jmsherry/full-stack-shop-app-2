@@ -19,6 +19,7 @@ exports.getOwnOrders = function (req, res) {
   let query = {
     customerID: req.user.sub, // ensure own orders only
   };
+
   if (req.params.id) {
     query._id = req.params.id;
   }
@@ -41,6 +42,7 @@ exports.addOrder = function (req, res) {
 };
 
 exports.addOwnOrder = function (req, res) {
+  // { items: [{}, {}], customerID: '23k42lj34278' }
   const orderData = {...req.body, customerID: req.user.sub};
   logger.info(`orderData ${orderData}`);
   const newOrder = new Order(orderData);
@@ -53,6 +55,8 @@ exports.addOwnOrder = function (req, res) {
 exports.updateOrder = function (req, res) {
   Order.updateOne({ _id: req.params.id }, req.body, function (err, result) {
     if (err) return errorHandler(res, err);
+    /// change the object
+    // obj.save()
     logger.info(`result ${result}`);
     if (result.nModified === 0)
       return res.status(404).send({ message: "No order with that ID" });

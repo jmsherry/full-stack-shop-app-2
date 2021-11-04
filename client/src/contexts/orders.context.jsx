@@ -27,7 +27,7 @@ export const OrdersProvider = (props) => {
     loading: false,
     loaded: false,
     error: null,
-    orders: [],
+    orders: [{}, {}],
   });
 
   const { loading, error, orders, loaded } = state;
