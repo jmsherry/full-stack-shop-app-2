@@ -11,7 +11,7 @@ const server = app.listen(PORT, function () {
   console.log(`Listening on ${PORT}`);
 });
 
-console.log({ server });
+// console.log({ server });
 
 process.on("uncaughtException", (err) => {
   // Honeybadger.notify(error); // log the error in a permanent storage
