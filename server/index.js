@@ -1,3 +1,7 @@
+// require("dotenv").config({ // <-- multiple .env files
+//   path: `.env.${process.env.NODE_ENV}`,
+// });
+require('dotenv').config();
 const app = require("./app");
 
 const { PORT = 5000 } = process.env;
