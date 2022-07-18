@@ -2,7 +2,9 @@
 //   path: `.env.${process.env.NODE_ENV}`,
 // });
 require('dotenv').config();
+const express = require('express')
 const app = require("./app");
+// const app = express();
 
 const { PORT = 5000 } = process.env;
 
@@ -14,6 +16,7 @@ const server = app.listen(PORT, function () {
 // console.log({ server });
 
 process.on("uncaughtException", (err) => {
+  console.log(err)
   // Honeybadger.notify(error); // log the error in a permanent storage
   // attempt a gracefully shutdown
   server.close(() => {
@@ -28,6 +31,7 @@ process.on("uncaughtException", (err) => {
 });
 
 process.on("unhandledRejection", (reason, promise) => {
+  console.log(reason);
   // Honeybadger.notify({
   //   message: 'Unhandled promise rejection',
   //   params: {

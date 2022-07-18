@@ -66,7 +66,7 @@ function OrdersDisplay() {
 
   return (
     <ul className={classes.categoriesList}>
-      {orders.map(({ _id, items }) => (
+      {orders.map(({ _id, items=[] }) => (
         <li key={_id}>
           <h2>Order ID: {_id}</h2>
           <ul style={{ listStyle: "none" }}>

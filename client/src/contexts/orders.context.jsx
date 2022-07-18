@@ -4,6 +4,7 @@ import { AuthContext } from "./auth.context";
 
 let headers = {
   "Content-Type": "application/json",
+  "X-Requested-With": "XMLHttpRequest",
   // 'Content-Type': 'application/x-www-form-urlencoded',
 };
 
